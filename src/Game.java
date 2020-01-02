@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
@@ -8,11 +9,17 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
 
+    private Random r;
     private Handler handler;
 
     public Game() {
         new Window(WIDTH, HEIGHT, "Let's build a game!", this);
         handler = new Handler();
+        r = new Random();
+
+        for (int i = 0; i < 50; i++) {
+            handler.addObject(new Player(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.Player));
+        }
     }
 
     public synchronized void start() {
