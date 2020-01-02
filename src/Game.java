@@ -23,10 +23,10 @@ public class Game extends Canvas implements Runnable {
 
         hud = new HUD();
 
-        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player));
+        handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
 
         for (int i = 0; i < 5; i++) {
-            handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy));
+            handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
         }
     }
 
@@ -111,7 +111,6 @@ public class Game extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        System.out.println("It works");
         new Game();
     }
 
