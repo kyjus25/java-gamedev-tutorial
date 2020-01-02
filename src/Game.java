@@ -12,22 +12,21 @@ public class Game extends Canvas implements Runnable {
     private Random r;
     private Handler handler;
     private HUD hud;
+    private Spawn spawner;
 
     public Game() {
         handler = new Handler();
         this.addKeyListener(new KeyInput(handler));
 
-        new Window(WIDTH, HEIGHT, "Let's build a game!", this);
+        new Window(WIDTH, HEIGHT, "Cubeoid", this);
 
         r = new Random();
 
         hud = new HUD();
+        spawner = new Spawn(handler, hud);
 
         handler.addObject(new Player(WIDTH / 2 - 32, HEIGHT / 2 - 32, ID.Player, handler));
-
-        for (int i = 0; i < 5; i++) {
-            handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
-        }
+        handler.addObject(new BasicEnemy(r.nextInt(WIDTH), r.nextInt(HEIGHT), ID.BasicEnemy, handler));
     }
 
     public synchronized void start() {
@@ -80,6 +79,7 @@ public class Game extends Canvas implements Runnable {
     private void tick() {
         handler.tick();
         hud.tick();
+        spawner.tick();
     }
 
     private void render() {
