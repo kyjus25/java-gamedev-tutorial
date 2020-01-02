@@ -27,7 +27,7 @@ public abstract class GameObject {
         return x;
     }
 
-    public int getY(int y) {
+    public int getY() {
         return y;
     }
 
